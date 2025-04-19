@@ -1,5 +1,9 @@
+import datetime
+
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+from typing import List, Tuple
+import models
 
 class DB:
     DB_NAME = "AutoManager"
@@ -44,10 +48,25 @@ CREATE DATABASE "AutoManager"
         cur.close()
         conn.close()
 
+    @staticmethod
+    def get_routes() -> List[models.Route]:
+        pass
 
+    @staticmethod
+    def save_route(route: models.Route) -> bool:
+        pass
 
+    @staticmethod
+    def get_schedule() -> List[models.Schedule]:
+        pass
 
+    @staticmethod
+    def get_next_trips() -> List[Tuple[datetime.time, models.Schedule]]:
+        pass
 
+    @staticmethod
+    def send_trip(bus, driver, schedule) -> bool:
+        pass
 
 if __name__ == '__main__':
     db = DB()

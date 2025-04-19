@@ -1,6 +1,5 @@
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QFile
 from ui.ui_MainWindowDesign import Ui_MainWindow
 
 class MainWindow(QMainWindow):
