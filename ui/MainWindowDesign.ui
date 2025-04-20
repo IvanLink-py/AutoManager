@@ -375,15 +375,8 @@
     <addaction name="tripRepportAction"/>
     <addaction name="busDriverReportAction"/>
    </widget>
-   <widget class="QMenu" name="menu_3">
-    <property name="title">
-     <string>Помощь</string>
-    </property>
-    <addaction name="action"/>
-   </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
-   <addaction name="menu_3"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action">
@@ -408,7 +401,7 @@
   </action>
   <action name="busDriverReportAction">
    <property name="text">
-    <string>Отчет по автобусам и воделям</string>
+    <string>Отчет по автобусам и водителям</string>
    </property>
   </action>
   <action name="addStopAction">
