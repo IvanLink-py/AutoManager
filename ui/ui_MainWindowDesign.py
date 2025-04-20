@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainWindowDesignnEUbFq.ui'
+## Form generated from reading UI file 'MainWindowDesignElNwLl.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.0
 ##
@@ -42,8 +42,14 @@ class Ui_MainWindow(object):
         self.addStopAction.setObjectName(u"addStopAction")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.horizontalLayout_9 = QHBoxLayout(self.centralwidget)
-        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.verticalLayout_7 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.label = QLabel(self.centralwidget)
+        self.label.setObjectName(u"label")
+        self.label.setStyleSheet(u"font: 700 14pt \"Segoe UI\";")
+
+        self.verticalLayout_7.addWidget(self.label)
+
         self.splitter_3 = QSplitter(self.centralwidget)
         self.splitter_3.setObjectName(u"splitter_3")
         self.splitter_3.setOrientation(Qt.Orientation.Horizontal)
@@ -56,12 +62,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QVBoxLayout(self.layoutWidget)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.label = QLabel(self.layoutWidget)
-        self.label.setObjectName(u"label")
-        self.label.setStyleSheet(u"font: 700 14pt \"Segoe UI\";")
-
-        self.verticalLayout_4.addWidget(self.label)
-
         self.routesListWidget = QListWidget(self.layoutWidget)
         self.routesListWidget.setObjectName(u"routesListWidget")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
@@ -298,7 +298,7 @@ class Ui_MainWindow(object):
         self.splitter.addWidget(self.layoutWidget_2)
         self.splitter_3.addWidget(self.splitter)
 
-        self.horizontalLayout_9.addWidget(self.splitter_3)
+        self.verticalLayout_7.addWidget(self.splitter_3)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)

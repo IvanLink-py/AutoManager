@@ -14,7 +14,17 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_9">
+   <layout class="QVBoxLayout" name="verticalLayout_7">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="styleSheet">
+       <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;</string>
+      </property>
+      <property name="text">
+       <string>ИС автотранспортного предприятия</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QSplitter" name="splitter_3">
       <property name="orientation">
@@ -29,16 +39,6 @@
        </property>
        <widget class="QWidget" name="layoutWidget">
         <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="styleSheet">
-            <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;</string>
-           </property>
-           <property name="text">
-            <string>ИС автотранспортного предприятия</string>
-           </property>
-          </widget>
-         </item>
          <item>
           <widget class="QListWidget" name="routesListWidget">
            <property name="sizePolicy">

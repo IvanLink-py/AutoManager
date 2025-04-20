@@ -34,7 +34,7 @@ class DB:
         model = dataclasses.asdict(model)
         q_fields = []
         for f in model:
-            if f == "_id":
+            if (f == "_id") or (type(model[f]) == list):
                 continue
             ad = adapt(model[f])
             if type(model[f]) != bool:
@@ -48,7 +48,7 @@ class DB:
         model = dataclasses.asdict(model)
         keys = []
         for k in model:
-            if k == "_id":
+            if (k == "_id") or (type(model[k]) == list):
                 continue
             keys.append(k)
         return ", ".join(keys)
@@ -85,11 +85,48 @@ CREATE DATABASE "AutoManager"
 
     @staticmethod
     def get_routes() -> List[models.Route]:
-        pass
+        stops = DB.get_stops()
+        routes = {}
+        route_stops = []
+
+        with DB.instance.conn.cursor() as curs:
+            sql = f"SELECT * FROM route"
+            curs.execute(sql)
+            for data in curs.fetchall():
+                routes[data[0]] = models.Route(data[0],data[1],data[2], [])
+
+        with DB.instance.conn.cursor() as curs:
+            sql = f'SELECT * FROM route_stop ORDER BY "index" ASC'
+            curs.execute(sql)
+            for data in curs.fetchall():
+                route_stops.append({"route_id": data[1], "stop_id": data[2]})
+
+        for rs in route_stops:
+            routes[rs["route_id"]].stops.append(filter(lambda s: s._id == rs["stop_id"], stops).__next__())
+
+        return list(routes.values())
 
     @staticmethod
-    def save_route(route: models.Route) -> bool:
-        pass
+    def save_route(route: models.Route):
+        if route is None:
+            return
+        with DB.instance.conn.cursor() as curs:
+            sql = f"INSERT INTO route ({DB.instance.get_fields(route)}) VALUES (%s)"
+            curs.execute(sql, (route,))
+
+        with DB.instance.conn.cursor() as curs:
+            sql = f"SELECT * FROM route WHERE name = %s LIMIT 1"
+            curs.execute(sql, (route.name, ))
+            route._id = curs.fetchone()[0]
+
+        with DB.instance.conn.cursor() as curs:
+            sql = f"DELETE FROM route_stop WHERE route_id = %s"
+            curs.execute(sql, (route._id, ))
+
+        with DB.instance.conn.cursor() as curs:
+            for i, stop in enumerate(route.stops):
+                sql = 'INSERT INTO route_stop (route_id, stop_id, "index") VALUES (%s, %s, %s)'
+                curs.execute(sql, (route._id, stop._id, i))
 
     @staticmethod
     def get_schedule() -> List[models.Schedule]:
@@ -132,7 +169,6 @@ CREATE DATABASE "AutoManager"
         with DB.instance.conn.cursor() as curs:
             sql = f"INSERT INTO stop ({DB.instance.get_fields(stop)}) VALUES (%s)"
             curs.execute(sql, (stop, ))
-
 
     @staticmethod
     def get_busses() -> List[models.Bus]:
