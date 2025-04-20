@@ -24,9 +24,9 @@ class MainWindow(QMainWindow):
         self.ui.addBusAction.triggered.connect(self.load_lists)
         self.ui.addStopAction.triggered.connect(self.load_lists)
 
-
         self.ui.savePushButton.clicked.connect(self.save_route)
         self.ui.sendPushButton.clicked.connect(self.sent_trip)
+        self.ui.endTripPushButton.clicked.connect(self.end_trip)
         self.ui.cancelPushButton.clicked.connect(self.cancel_edit_route)
         self.ui.addRouteStopPushButton.clicked.connect(self.add_route_stop)
         self.ui.routesListWidget.currentRowChanged.connect(self.change_current_route)
@@ -149,6 +149,12 @@ class MainWindow(QMainWindow):
         self.ui.nextScheduleListWidget.insertItems(0, [
             f'{b.route.name} (остановок: {len(b.route.stops)}) - {b.start_time.strftime("%H:%M")}' for b in
             DB.get_next_trips()])
+
+    def end_trip(self):
+        if self.ui.currentTripListWidget.currentRow() == -1:
+            return
+        DB.end_trip(DB.get_actual_trips()[self.ui.currentTripListWidget.currentRow()], self.ui.tripStatusComboBox.currentText() == "Успешно")
+        self.load_current_trips()
 
 
 if __name__ == "__main__":

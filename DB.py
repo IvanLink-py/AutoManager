@@ -277,7 +277,9 @@ CREATE DATABASE "AutoManager"
 
     @staticmethod
     def end_trip(trip: models.Trip, success: bool) -> bool:
-        pass
+        with DB.instance.conn.cursor() as curs:
+            sql = f"UPDATE trip SET success=%s WHERE id=%s;"
+            curs.execute(sql, (success, trip._id))
 
 
 if __name__ == '__main__':
