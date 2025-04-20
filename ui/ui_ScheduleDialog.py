@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ScheduleDialogXHkIII.ui'
+## Form generated from reading UI file 'ScheduleDialogdqxLjh.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.0
 ##
@@ -79,36 +79,43 @@ class Ui_Dialog(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.weekCheckBox_1 = QCheckBox(Dialog)
         self.weekCheckBox_1.setObjectName(u"weekCheckBox_1")
+        self.weekCheckBox_1.setChecked(True)
 
         self.gridLayout.addWidget(self.weekCheckBox_1, 0, 0, 1, 1)
 
         self.weekCheckBox_6 = QCheckBox(Dialog)
         self.weekCheckBox_6.setObjectName(u"weekCheckBox_6")
+        self.weekCheckBox_6.setChecked(True)
 
         self.gridLayout.addWidget(self.weekCheckBox_6, 0, 1, 1, 1)
 
         self.weekCheckBox_2 = QCheckBox(Dialog)
         self.weekCheckBox_2.setObjectName(u"weekCheckBox_2")
+        self.weekCheckBox_2.setChecked(True)
 
         self.gridLayout.addWidget(self.weekCheckBox_2, 1, 0, 1, 1)
 
         self.weekCheckBox_7 = QCheckBox(Dialog)
         self.weekCheckBox_7.setObjectName(u"weekCheckBox_7")
+        self.weekCheckBox_7.setChecked(True)
 
         self.gridLayout.addWidget(self.weekCheckBox_7, 1, 1, 1, 1)
 
         self.weekCheckBox_3 = QCheckBox(Dialog)
         self.weekCheckBox_3.setObjectName(u"weekCheckBox_3")
+        self.weekCheckBox_3.setChecked(True)
 
         self.gridLayout.addWidget(self.weekCheckBox_3, 2, 0, 1, 1)
 
         self.weekCheckBox_4 = QCheckBox(Dialog)
         self.weekCheckBox_4.setObjectName(u"weekCheckBox_4")
+        self.weekCheckBox_4.setChecked(True)
 
         self.gridLayout.addWidget(self.weekCheckBox_4, 3, 0, 1, 1)
 
         self.weekCheckBox_5 = QCheckBox(Dialog)
         self.weekCheckBox_5.setObjectName(u"weekCheckBox_5")
+        self.weekCheckBox_5.setChecked(True)
 
         self.gridLayout.addWidget(self.weekCheckBox_5, 4, 0, 1, 1)
 
@@ -131,8 +138,8 @@ class Ui_Dialog(object):
     # setupUi
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
-        self.label.setText(QCoreApplication.translate("Dialog", u"\u041d\u043e\u0432\u043e\u0435 \u0440\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435", None))
+        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435 \u0440\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u044f", None))
+        self.label.setText(QCoreApplication.translate("Dialog", u"\u041d\u043e\u0432\u044b\u0439 \u044d\u043b\u0435\u043c\u0435\u043d\u0442 \u0440\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u044f", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"\u041c\u0430\u0440\u0448\u0440\u0443\u0442", None))
         self.weekCheckBox_1.setText(QCoreApplication.translate("Dialog", u"\u041f\u043d", None))
         self.weekCheckBox_6.setText(QCoreApplication.translate("Dialog", u"\u0421\u0431", None))

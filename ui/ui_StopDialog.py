@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'StopDialogQxmRRO.ui'
+## Form generated from reading UI file 'StopDialogGHpOxS.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.0
 ##
@@ -83,7 +83,7 @@ class Ui_Dialog(object):
     # setupUi
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"\u0423\u0447\u0451\u0442 \u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043e\u043a", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"\u041d\u043e\u0432\u0430\u044f \u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435", None))
     # retranslateUi

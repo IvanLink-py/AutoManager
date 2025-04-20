@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'BusDialogbsZZRC.ui'
+## Form generated from reading UI file 'BusDialogPmCTQR.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.0
 ##
@@ -101,7 +101,7 @@ class Ui_Dialog(object):
     # setupUi
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"\u0423\u0447\u0451\u0442 \u0430\u0432\u0442\u043e\u0442\u0440\u0430\u043d\u0441\u043f\u043e\u0440\u0442\u0430", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"\u041d\u043e\u0432\u044b\u0439 \u0430\u0432\u0442\u043e\u043c\u043e\u0431\u0438\u043b\u044c", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"\u041d\u043e\u043c\u0435\u0440", None))
         self.label_3.setText(QCoreApplication.translate("Dialog", u"\u041c\u0430\u0440\u043a\u0430", None))

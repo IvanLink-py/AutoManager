@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Обновление расписания</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -26,7 +26,7 @@
       <string notr="true">font: 700 11pt &quot;Segoe UI&quot;;</string>
      </property>
      <property name="text">
-      <string>Новое расписание</string>
+      <string>Новый элемент расписания</string>
      </property>
     </widget>
    </item>
@@ -97,12 +97,18 @@
        <property name="text">
         <string>Пн</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item row="0" column="1">
       <widget class="QCheckBox" name="weekCheckBox_6">
        <property name="text">
         <string>Сб</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -111,12 +117,18 @@
        <property name="text">
         <string>Вт</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item row="1" column="1">
       <widget class="QCheckBox" name="weekCheckBox_7">
        <property name="text">
         <string>Вс</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -125,6 +137,9 @@
        <property name="text">
         <string>Ср</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item row="3" column="0">
@@ -132,12 +147,18 @@
        <property name="text">
         <string>Чт</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item row="4" column="0">
       <widget class="QCheckBox" name="weekCheckBox_5">
        <property name="text">
         <string>Пт</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
