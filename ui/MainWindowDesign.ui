@@ -375,11 +375,15 @@
     <property name="title">
      <string>Информационная система</string>
     </property>
+    <addaction name="addDriverAction"/>
+    <addaction name="addBusAction"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
      <string>Отчеты</string>
     </property>
+    <addaction name="tripRepportAction"/>
+    <addaction name="busDriverReportAction"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -395,6 +399,26 @@
   <action name="action">
    <property name="text">
     <string>О программе</string>
+   </property>
+  </action>
+  <action name="addDriverAction">
+   <property name="text">
+    <string>Добавить водителя</string>
+   </property>
+  </action>
+  <action name="addBusAction">
+   <property name="text">
+    <string>Добавить автобус</string>
+   </property>
+  </action>
+  <action name="tripRepportAction">
+   <property name="text">
+    <string>Отчёт по рейсам</string>
+   </property>
+  </action>
+  <action name="busDriverReportAction">
+   <property name="text">
+    <string>Отчет по автобусам и воделям</string>
    </property>
   </action>
  </widget>

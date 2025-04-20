@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainWindowDesignaiCutY.ui'
+## Form generated from reading UI file 'MainWindowDesignqDRLij.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.0
 ##
@@ -30,6 +30,14 @@ class Ui_MainWindow(object):
         MainWindow.resize(1146, 770)
         self.action = QAction(MainWindow)
         self.action.setObjectName(u"action")
+        self.addDriverAction = QAction(MainWindow)
+        self.addDriverAction.setObjectName(u"addDriverAction")
+        self.addBusAction = QAction(MainWindow)
+        self.addBusAction.setObjectName(u"addBusAction")
+        self.tripRepportAction = QAction(MainWindow)
+        self.tripRepportAction.setObjectName(u"tripRepportAction")
+        self.busDriverReportAction = QAction(MainWindow)
+        self.busDriverReportAction.setObjectName(u"busDriverReportAction")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout_9 = QHBoxLayout(self.centralwidget)
@@ -308,6 +316,10 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu.menuAction())
         self.menubar.addAction(self.menu_2.menuAction())
         self.menubar.addAction(self.menu_3.menuAction())
+        self.menu.addAction(self.addDriverAction)
+        self.menu.addAction(self.addBusAction)
+        self.menu_2.addAction(self.tripRepportAction)
+        self.menu_2.addAction(self.busDriverReportAction)
         self.menu_3.addAction(self.action)
 
         self.retranslateUi(MainWindow)
@@ -318,6 +330,10 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.action.setText(QCoreApplication.translate("MainWindow", u"\u041e \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0435", None))
+        self.addDriverAction.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044f", None))
+        self.addBusAction.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0430\u0432\u0442\u043e\u0431\u0443\u0441", None))
+        self.tripRepportAction.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u0447\u0451\u0442 \u043f\u043e \u0440\u0435\u0439\u0441\u0430\u043c", None))
+        self.busDriverReportAction.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u0447\u0435\u0442 \u043f\u043e \u0430\u0432\u0442\u043e\u0431\u0443\u0441\u0430\u043c \u0438 \u0432\u043e\u0434\u0435\u043b\u044f\u043c", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0421 \u0430\u0432\u0442\u043e\u0442\u0440\u0430\u043d\u0441\u043f\u043e\u0440\u0442\u043d\u043e\u0433\u043e \u043f\u0440\u0435\u0434\u043f\u0440\u0438\u044f\u0442\u0438\u044f", None))
         self.changeRoutePushButton.setText(QCoreApplication.translate("MainWindow", u"\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c", None))
         self.deleteRoutePushButton.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
