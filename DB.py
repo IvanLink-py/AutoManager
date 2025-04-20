@@ -110,6 +110,17 @@ CREATE DATABASE "AutoManager"
     def save_route(route: models.Route):
         if route is None:
             return
+
+        if route._id != -1:
+            with DB.instance.conn.cursor() as curs:
+                sql = f"DELETE FROM route_stop WHERE route_id = %s"
+                curs.execute(sql, (route._id,))
+
+            with DB.instance.conn.cursor() as curs:
+                sql = f"DELETE FROM route WHERE id = %s "
+                curs.execute(sql, (route._id,))
+
+
         with DB.instance.conn.cursor() as curs:
             sql = f"INSERT INTO route ({DB.instance.get_fields(route)}) VALUES (%s)"
             curs.execute(sql, (route,))
@@ -120,13 +131,10 @@ CREATE DATABASE "AutoManager"
             route._id = curs.fetchone()[0]
 
         with DB.instance.conn.cursor() as curs:
-            sql = f"DELETE FROM route_stop WHERE route_id = %s"
-            curs.execute(sql, (route._id, ))
-
-        with DB.instance.conn.cursor() as curs:
             for i, stop in enumerate(route.stops):
                 sql = 'INSERT INTO route_stop (route_id, stop_id, "index") VALUES (%s, %s, %s)'
                 curs.execute(sql, (route._id, stop._id, i))
+
 
     @staticmethod
     def get_schedule() -> List[models.Schedule]:

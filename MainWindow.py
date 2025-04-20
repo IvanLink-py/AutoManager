@@ -21,7 +21,9 @@ class MainWindow(QMainWindow):
         self.ui.addStopAction.triggered.connect(lambda: DB.create_stop(Dialogs.StopDialog.get_new(self)))
 
         self.ui.savePushButton.clicked.connect(self.save_route)
+        self.ui.cancelPushButton.clicked.connect(self.cancel_edit_route)
         self.ui.addRouteStopPushButton.clicked.connect(self.add_route_stop)
+        self.ui.routesListWidget.itemClicked.connect(self.change_current_route)
 
 
 
@@ -32,7 +34,7 @@ class MainWindow(QMainWindow):
 
         self.load_routes()
 
-        self.load_stops()
+        self.load_current_route()
 
     def load_routes(self):
         self.ui.routesListWidget.clear()
@@ -46,10 +48,23 @@ class MainWindow(QMainWindow):
         self.current_route.stops.append(DB.get_stops()[self.ui.newRouteStopComboBox.currentIndex()])
         self.load_stops()
 
+    def change_current_route(self, item):
+        i = self.ui.routesListWidget.indexFromItem(item).row()
+        self.current_route = DB.get_routes()[i]
+        self.load_current_route()
+
+    def load_current_route(self):
+        self.ui.routeNameLineEdit.setText(self.current_route.name)
+        self.load_stops()
+
     def save_route(self):
         self.current_route.name = self.ui.routeNameLineEdit.text()
         DB.save_route(self.current_route)
         self.load_routes()
+
+    def cancel_edit_route(self):
+        self.current_route = models.Route(-1, "", False, [])
+        self.load_current_route()
 
     def update_route(self):
         pass
