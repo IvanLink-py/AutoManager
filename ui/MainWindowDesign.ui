@@ -377,6 +377,7 @@
     </property>
     <addaction name="addDriverAction"/>
     <addaction name="addBusAction"/>
+    <addaction name="addStopAction"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -419,6 +420,11 @@
   <action name="busDriverReportAction">
    <property name="text">
     <string>Отчет по автобусам и воделям</string>
+   </property>
+  </action>
+  <action name="addStopAction">
+   <property name="text">
+    <string>Добавить остановку</string>
    </property>
   </action>
  </widget>

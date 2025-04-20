@@ -37,7 +37,8 @@ class DB:
             if f == "_id":
                 continue
             ad = adapt(model[f])
-            ad.prepare(DB.instance.conn)
+            if type(model[f]) != bool:
+                ad.prepare(DB.instance.conn)
             q_fields.append(ad.getquoted().decode("utf-8"))
 
         return AsIs(f"{', '.join(q_fields)}")
@@ -112,6 +113,26 @@ CREATE DATABASE "AutoManager"
                 result.append(models.Driver(*data))
 
         return result
+
+    @staticmethod
+    def get_stops() -> List[models.Stop]:
+        with DB.instance.conn.cursor() as curs:
+            sql = f"SELECT * FROM stop"
+            curs.execute(sql)
+            result = []
+            for data in curs.fetchall():
+                result.append(models.Stop(*data))
+
+        return result
+
+    @staticmethod
+    def create_stop(stop: models.Stop):
+        if stop is None:
+            return
+        with DB.instance.conn.cursor() as curs:
+            sql = f"INSERT INTO stop ({DB.instance.get_fields(stop)}) VALUES (%s)"
+            curs.execute(sql, (stop, ))
+
 
     @staticmethod
     def get_busses() -> List[models.Bus]:
