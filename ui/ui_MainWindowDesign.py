@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainWindowDesignKoyrrt.ui'
+## Form generated from reading UI file 'MainWindowDesignaiCutY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.0
 ##
@@ -27,24 +27,32 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1137, 677)
+        MainWindow.resize(1146, 770)
         self.action = QAction(MainWindow)
         self.action.setObjectName(u"action")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.horizontalLayout_8 = QHBoxLayout(self.centralwidget)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.verticalLayout_6 = QVBoxLayout()
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.label = QLabel(self.centralwidget)
+        self.horizontalLayout_9 = QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.splitter_3 = QSplitter(self.centralwidget)
+        self.splitter_3.setObjectName(u"splitter_3")
+        self.splitter_3.setOrientation(Qt.Orientation.Horizontal)
+        self.splitter_3.setHandleWidth(15)
+        self.splitter_2 = QSplitter(self.splitter_3)
+        self.splitter_2.setObjectName(u"splitter_2")
+        self.splitter_2.setOrientation(Qt.Orientation.Vertical)
+        self.layoutWidget = QWidget(self.splitter_2)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.verticalLayout_4 = QVBoxLayout(self.layoutWidget)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.label = QLabel(self.layoutWidget)
         self.label.setObjectName(u"label")
         self.label.setStyleSheet(u"font: 700 14pt \"Segoe UI\";")
 
-        self.verticalLayout_6.addWidget(self.label)
+        self.verticalLayout_4.addWidget(self.label)
 
-        self.verticalLayout_4 = QVBoxLayout()
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.routesListWidget = QListWidget(self.centralwidget)
+        self.routesListWidget = QListWidget(self.layoutWidget)
         self.routesListWidget.setObjectName(u"routesListWidget")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -60,12 +68,12 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
-        self.changeRoutePushButton = QPushButton(self.centralwidget)
+        self.changeRoutePushButton = QPushButton(self.layoutWidget)
         self.changeRoutePushButton.setObjectName(u"changeRoutePushButton")
 
         self.horizontalLayout.addWidget(self.changeRoutePushButton)
 
-        self.deleteRoutePushButton = QPushButton(self.centralwidget)
+        self.deleteRoutePushButton = QPushButton(self.layoutWidget)
         self.deleteRoutePushButton.setObjectName(u"deleteRoutePushButton")
 
         self.horizontalLayout.addWidget(self.deleteRoutePushButton)
@@ -73,10 +81,8 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addLayout(self.horizontalLayout)
 
-
-        self.verticalLayout_6.addLayout(self.verticalLayout_4)
-
-        self.groupBox = QGroupBox(self.centralwidget)
+        self.splitter_2.addWidget(self.layoutWidget)
+        self.groupBox = QGroupBox(self.splitter_2)
         self.groupBox.setObjectName(u"groupBox")
         self.verticalLayout_3 = QVBoxLayout(self.groupBox)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -163,17 +169,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
 
-
-        self.verticalLayout_6.addWidget(self.groupBox)
-
-
-        self.horizontalLayout_8.addLayout(self.verticalLayout_6)
-
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_8.addItem(self.horizontalSpacer_4)
-
-        self.splitter = QSplitter(self.centralwidget)
+        self.splitter_2.addWidget(self.groupBox)
+        self.splitter_3.addWidget(self.splitter_2)
+        self.splitter = QSplitter(self.splitter_3)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setOrientation(Qt.Orientation.Vertical)
         self.scheduleTableWidget = QTableWidget(self.splitter)
@@ -187,16 +185,16 @@ class Ui_MainWindow(object):
         self.scheduleTableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         self.scheduleTableWidget.setObjectName(u"scheduleTableWidget")
         self.splitter.addWidget(self.scheduleTableWidget)
-        self.layoutWidget = QWidget(self.splitter)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.horizontalLayout_7 = QHBoxLayout(self.layoutWidget)
+        self.layoutWidget1 = QWidget(self.splitter)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.horizontalLayout_7 = QHBoxLayout(self.layoutWidget1)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.horizontalSpacer_3 = QSpacerItem(120, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_7.addItem(self.horizontalSpacer_3)
 
-        self.groupBox_3 = QGroupBox(self.layoutWidget)
+        self.groupBox_3 = QGroupBox(self.layoutWidget1)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.verticalLayout_5 = QVBoxLayout(self.groupBox_3)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
@@ -243,14 +241,59 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_7.addWidget(self.groupBox_3)
 
-        self.splitter.addWidget(self.layoutWidget)
+        self.splitter.addWidget(self.layoutWidget1)
+        self.layoutWidget_2 = QWidget(self.splitter)
+        self.layoutWidget_2.setObjectName(u"layoutWidget_2")
+        self.horizontalLayout_8 = QHBoxLayout(self.layoutWidget_2)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.horizontalSpacer_4 = QSpacerItem(120, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_8.addWidget(self.splitter)
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_4)
+
+        self.groupBox_4 = QGroupBox(self.layoutWidget_2)
+        self.groupBox_4.setObjectName(u"groupBox_4")
+        self.verticalLayout_6 = QVBoxLayout(self.groupBox_4)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.currentTripListWidget = QListWidget(self.groupBox_4)
+        self.currentTripListWidget.setObjectName(u"currentTripListWidget")
+
+        self.verticalLayout_6.addWidget(self.currentTripListWidget)
+
+        self.horizontalLayout_10 = QHBoxLayout()
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.label_6 = QLabel(self.groupBox_4)
+        self.label_6.setObjectName(u"label_6")
+
+        self.horizontalLayout_10.addWidget(self.label_6)
+
+        self.tripStatusComboBox = QComboBox(self.groupBox_4)
+        self.tripStatusComboBox.addItem("")
+        self.tripStatusComboBox.addItem("")
+        self.tripStatusComboBox.setObjectName(u"tripStatusComboBox")
+
+        self.horizontalLayout_10.addWidget(self.tripStatusComboBox)
+
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_10)
+
+        self.endTripPushButton = QPushButton(self.groupBox_4)
+        self.endTripPushButton.setObjectName(u"endTripPushButton")
+
+        self.verticalLayout_6.addWidget(self.endTripPushButton)
+
+
+        self.horizontalLayout_8.addWidget(self.groupBox_4)
+
+        self.splitter.addWidget(self.layoutWidget_2)
+        self.splitter_3.addWidget(self.splitter)
+
+        self.horizontalLayout_9.addWidget(self.splitter_3)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1137, 22))
+        self.menubar.setGeometry(QRect(0, 0, 1146, 22))
         self.menu = QMenu(self.menubar)
         self.menu.setObjectName(u"menu")
         self.menu_2 = QMenu(self.menubar)
@@ -294,6 +337,12 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0432\u0442\u043e\u0431\u0443\u0441", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u0412\u043e\u0434\u0438\u0442\u0435\u043b\u044c", None))
         self.sendPushButton.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c", None))
+        self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"\u0422\u0435\u043a\u0443\u0449\u0438\u0435 \u0440\u0435\u0439\u0441\u044b", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0442\u0430\u0442\u0443\u0441", None))
+        self.tripStatusComboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"\u0423\u0441\u043f\u0435\u0448\u043d\u043e", None))
+        self.tripStatusComboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0421\u0440\u044b\u0432 \u0440\u0435\u0439\u0441\u0430", None))
+
+        self.endTripPushButton.setText(QCoreApplication.translate("MainWindow", u"\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044c", None))
         self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u043e\u043d\u043d\u0430\u044f \u0441\u0438\u0441\u0442\u0435\u043c\u0430", None))
         self.menu_2.setTitle(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u0447\u0435\u0442\u044b", None))
         self.menu_3.setTitle(QCoreApplication.translate("MainWindow", u"\u041f\u043e\u043c\u043e\u0449\u044c", None))

@@ -67,6 +67,10 @@ CREATE DATABASE "AutoManager"
     @staticmethod
     def send_trip(bus, driver, schedule) -> bool:
         pass
+    
+    @staticmethod
+    def end_trip(trip: models.Trip, success: bool) -> bool:
+        pass
 
 if __name__ == '__main__':
     db = DB()
