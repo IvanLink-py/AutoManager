@@ -31,7 +31,7 @@ class DB:
             app = QtWidgets.QApplication(sys.argv)
             a = QtWidgets.QMessageBox.information(None, 'Обновление конфигурации',
                                                   "Не удалось найти конфигурационный файл 'config.ini'\nЗаполните данные для подкючения в файл.",
-                                               QtWidgets.QMessageBox.Ok)
+                                                  QtWidgets.QMessageBox.Ok)
             sys.exit(0)
 
         else:
@@ -92,7 +92,9 @@ class DB:
             import sys
             from PySide6 import QtWidgets
             app = QtWidgets.QApplication(sys.argv)
-            a = QtWidgets.QMessageBox.critical(None, 'Ошибка подключения', "Не удалось подключиться к БД\nПроверьте config.ini", QtWidgets.QMessageBox.Ok)
+            a = QtWidgets.QMessageBox.critical(None, 'Ошибка подключения',
+                                               "Не удалось подключиться к БД\nПроверьте config.ini",
+                                               QtWidgets.QMessageBox.Ok)
             sys.exit(0)
 
         conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)

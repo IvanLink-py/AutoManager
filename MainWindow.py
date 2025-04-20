@@ -146,7 +146,8 @@ class MainWindow(QMainWindow):
     def load_current_trips(self):
         self.ui.currentTripListWidget.clear()
         self.ui.currentTripListWidget.insertItems(0, [
-            f'{t.schedule_id.route.name} (остановок: {len(t.schedule_id.route.stops)}) - {t.schedule_id.start_time.strftime("%H:%M")} ({t.send_time.strftime("%H:%M")})' for
+            f'{t.schedule_id.route.name} (остановок: {len(t.schedule_id.route.stops)}) - {t.schedule_id.start_time.strftime("%H:%M")} ({t.send_time.strftime("%H:%M")})'
+            for
             t in DB.get_actual_trips()])
 
     def load_next_trip(self):
@@ -158,7 +159,8 @@ class MainWindow(QMainWindow):
     def end_trip(self):
         if self.ui.currentTripListWidget.currentRow() == -1:
             return
-        DB.end_trip(DB.get_actual_trips()[self.ui.currentTripListWidget.currentRow()], self.ui.tripStatusComboBox.currentText() == "Успешно")
+        DB.end_trip(DB.get_actual_trips()[self.ui.currentTripListWidget.currentRow()],
+                    self.ui.tripStatusComboBox.currentText() == "Успешно")
         self.load_current_trips()
 
 
