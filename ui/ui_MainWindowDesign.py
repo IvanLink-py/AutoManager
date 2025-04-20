@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainWindowDesignZucvGT.ui'
+## Form generated from reading UI file 'MainWindowDesignspRiEk.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.0
 ##
@@ -214,6 +214,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.nextScheduleListWidget = QListWidget(self.groupBox_3)
         self.nextScheduleListWidget.setObjectName(u"nextScheduleListWidget")
+        self.nextScheduleListWidget.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.nextScheduleListWidget.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.nextScheduleListWidget.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
 
         self.verticalLayout_5.addWidget(self.nextScheduleListWidget)
 

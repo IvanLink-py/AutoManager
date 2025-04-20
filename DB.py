@@ -139,7 +139,7 @@ CREATE DATABASE "AutoManager"
     @staticmethod
     def get_schedule() -> List[models.Schedule]:
         with DB.instance.conn.cursor() as curs:
-            sql = f"SELECT * FROM schedule"
+            sql = f"SELECT * FROM schedule order by start_time"
             curs.execute(sql)
             result = []
             for data in curs.fetchall():
@@ -160,8 +160,30 @@ CREATE DATABASE "AutoManager"
             curs.execute(sql, (schedule.start_time, schedule.week_days, schedule.route._id))
 
     @staticmethod
-    def get_next_trips() -> List[Tuple[datetime.time, models.Schedule]]:
-        pass
+    def get_next_trips() -> List[models.Schedule]:
+        schedules = DB.get_schedule()
+        next_trips = []
+
+        if datetime.date.today().weekday() == 0:
+            td = "ПН"
+        elif datetime.date.today().weekday() == 1:
+            td = "ВТ"
+        elif datetime.date.today().weekday() == 2:
+            td = "СР"
+        elif datetime.date.today().weekday() == 3:
+            td = "ЧТ"
+        elif datetime.date.today().weekday() == 4:
+            td = "ПТ"
+        elif datetime.date.today().weekday() == 5:
+            td = "СБ"
+        else:
+            td = "ВС"
+
+        for sch in schedules:
+            if td.lower() in sch.week_days.lower():
+                next_trips.append(sch)
+
+        return next_trips
 
     @staticmethod
     def send_trip(bus: models.Bus, driver: models.Driver, schedule: models.Schedule) -> bool:

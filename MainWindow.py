@@ -37,6 +37,8 @@ class MainWindow(QMainWindow):
 
         self.load_current_route()
 
+        self.load_next_trip()
+
         self.ui.scheduleTableWidget.contextMenuEvent = self.open_table_menu
 
     def open_table_menu(self, event):
@@ -117,6 +119,10 @@ class MainWindow(QMainWindow):
 
     def update_route(self):
         pass
+
+    def load_next_trip(self):
+        self.ui.nextScheduleListWidget.clear()
+        self.ui.nextScheduleListWidget.insertItems(0, [f'{b.route.name} (остановок: {len(b.route.stops)}) - {b.start_time.strftime("%H:%M")}' for b in DB.get_next_trips()])
 
 
 if __name__ == "__main__":
