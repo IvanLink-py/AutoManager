@@ -20,7 +20,13 @@ class MainWindow(QMainWindow):
         self.ui.addBusAction.triggered.connect(lambda: DB.create_bus(Dialogs.BusDialog.get_new(self)))
         self.ui.addStopAction.triggered.connect(lambda: DB.create_stop(Dialogs.StopDialog.get_new(self)))
 
+        self.ui.addDriverAction.triggered.connect(self.load_lists)
+        self.ui.addBusAction.triggered.connect(self.load_lists)
+        self.ui.addStopAction.triggered.connect(self.load_lists)
+
+
         self.ui.savePushButton.clicked.connect(self.save_route)
+        self.ui.sendPushButton.clicked.connect(self.sent_trip)
         self.ui.cancelPushButton.clicked.connect(self.cancel_edit_route)
         self.ui.addRouteStopPushButton.clicked.connect(self.add_route_stop)
         self.ui.routesListWidget.currentRowChanged.connect(self.change_current_route)
@@ -28,18 +34,23 @@ class MainWindow(QMainWindow):
         self.load()
 
     def load(self):
-        self.ui.driverComboBox.insertItems(0, [f'{d.last_name} {d.first_name} {d.surname}' for d in DB.get_drivers()])
-        self.ui.busComboBox.insertItems(0, [f'{b.mark} - {b.number}' for b in DB.get_busses()])
-        self.ui.newRouteStopComboBox.insertItems(0, [f'{b.name}' for b in DB.get_stops()])
-
+        self.load_lists()
         self.load_routes()
         self.load_schedule()
-
         self.load_current_route()
-
+        self.load_current_trips()
         self.load_next_trip()
 
         self.ui.scheduleTableWidget.contextMenuEvent = self.open_table_menu
+
+    def load_lists(self):
+        self.ui.driverComboBox.clear()
+        self.ui.busComboBox.clear()
+        self.ui.newRouteStopComboBox.clear()
+
+        self.ui.driverComboBox.insertItems(0, [f'{d.last_name} {d.first_name} {d.surname}' for d in DB.get_drivers()])
+        self.ui.busComboBox.insertItems(0, [f'{b.mark} - {b.number}' for b in DB.get_busses()])
+        self.ui.newRouteStopComboBox.insertItems(0, [f'{b.name}' for b in DB.get_stops()])
 
     def open_table_menu(self, event):
         menu = QMenu(self)
@@ -55,9 +66,10 @@ class MainWindow(QMainWindow):
 
         DB.save_schedule(sch)
         self.load_schedule()
+        self.load_next_trip()
 
     def load_schedule(self):
-        self.ui.scheduleTableWidget.clear()
+        self.ui.scheduleTableWidget.clearContents()
 
         __qtablewidgetitem = QTableWidgetItem()
         self.ui.scheduleTableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
@@ -117,12 +129,26 @@ class MainWindow(QMainWindow):
         self.current_route = models.Route(-1, "", False, [])
         self.load_current_route()
 
-    def update_route(self):
-        pass
+    def sent_trip(self):
+        DB.send_trip(
+            DB.get_busses()[self.ui.busComboBox.currentIndex()],
+            DB.get_drivers()[self.ui.driverComboBox.currentIndex()],
+            DB.get_next_trips()[self.ui.nextScheduleListWidget.currentRow()]
+        )
+        self.load_current_trips()
+        self.load_next_trip()
+
+    def load_current_trips(self):
+        self.ui.currentTripListWidget.clear()
+        self.ui.currentTripListWidget.insertItems(0, [
+            f'{t.schedule_id.route.name} (остановок: {len(t.schedule_id.route.stops)}) - {t.schedule_id.start_time.strftime("%H:%M")} ({t.send_time.strftime("%H:%M")})' for
+            t in DB.get_actual_trips()])
 
     def load_next_trip(self):
         self.ui.nextScheduleListWidget.clear()
-        self.ui.nextScheduleListWidget.insertItems(0, [f'{b.route.name} (остановок: {len(b.route.stops)}) - {b.start_time.strftime("%H:%M")}' for b in DB.get_next_trips()])
+        self.ui.nextScheduleListWidget.insertItems(0, [
+            f'{b.route.name} (остановок: {len(b.route.stops)}) - {b.start_time.strftime("%H:%M")}' for b in
+            DB.get_next_trips()])
 
 
 if __name__ == "__main__":

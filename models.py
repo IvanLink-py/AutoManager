@@ -41,3 +41,5 @@ class Trip:
     bus_id: Bus
     driver_id: Driver
     schedule_id: Schedule
+    success: bool
+    send_time: datetime.datetime

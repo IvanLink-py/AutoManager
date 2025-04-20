@@ -17,6 +17,7 @@ CREATE TABLE "trip" (
 	"driver_id" INTEGER NOT NULL,
 	"schedule_id" INTEGER,
 	"success" BOOLEAN DEFAULT NULL,
+	"send_time" TIMESTAMP NOT NULL,
 	PRIMARY KEY("id")
 );
 COMMENT ON TABLE "trip" IS 'Рейс';

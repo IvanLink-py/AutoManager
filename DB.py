@@ -1,11 +1,12 @@
 import datetime
 
 import psycopg2
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT, NoneAdapter
 from psycopg2.extensions import adapt, register_adapter, AsIs
 from typing import List, Tuple
 import dataclasses
 import models
+
 
 class DB:
     DB_NAME = "AutoManager"
@@ -37,7 +38,7 @@ class DB:
             if (f == "_id") or (type(model[f]) == list):
                 continue
             ad = adapt(model[f])
-            if type(model[f]) != bool:
+            if type(model[f]) != bool and type(model[f]) != int and type(ad) != NoneAdapter and type(model[f]) != datetime.datetime:
                 ad.prepare(DB.instance.conn)
             q_fields.append(ad.getquoted().decode("utf-8"))
 
@@ -93,7 +94,7 @@ CREATE DATABASE "AutoManager"
             sql = f"SELECT * FROM route"
             curs.execute(sql)
             for data in curs.fetchall():
-                routes[data[0]] = models.Route(data[0],data[1],data[2], [])
+                routes[data[0]] = models.Route(data[0], data[1], data[2], [])
 
         with DB.instance.conn.cursor() as curs:
             sql = f'SELECT * FROM route_stop ORDER BY "index" ASC'
@@ -120,21 +121,19 @@ CREATE DATABASE "AutoManager"
                 sql = f"DELETE FROM route WHERE id = %s "
                 curs.execute(sql, (route._id,))
 
-
         with DB.instance.conn.cursor() as curs:
             sql = f"INSERT INTO route ({DB.instance.get_fields(route)}) VALUES (%s)"
             curs.execute(sql, (route,))
 
         with DB.instance.conn.cursor() as curs:
             sql = f"SELECT * FROM route WHERE name = %s LIMIT 1"
-            curs.execute(sql, (route.name, ))
+            curs.execute(sql, (route.name,))
             route._id = curs.fetchone()[0]
 
         with DB.instance.conn.cursor() as curs:
             for i, stop in enumerate(route.stops):
                 sql = 'INSERT INTO route_stop (route_id, stop_id, "index") VALUES (%s, %s, %s)'
                 curs.execute(sql, (route._id, stop._id, i))
-
 
     @staticmethod
     def get_schedule() -> List[models.Schedule]:
@@ -183,11 +182,41 @@ CREATE DATABASE "AutoManager"
             if td.lower() in sch.week_days.lower():
                 next_trips.append(sch)
 
+        with DB.instance.conn.cursor() as curs:
+            sql = f"SELECT * FROM trip where DATE(send_time) = CURRENT_DATE "
+            curs.execute(sql)
+            td_trips = []
+            for data in curs.fetchall():
+                td_trips.append(models.Trip(*data))
+
+        for td_trip in td_trips:
+            next_trips.remove(filter(lambda t: td_trip.schedule_id == t._id, next_trips).__next__())
+
         return next_trips
 
     @staticmethod
-    def send_trip(bus: models.Bus, driver: models.Driver, schedule: models.Schedule) -> bool:
-        pass
+    def send_trip(bus: models.Bus, driver: models.Driver, schedule: models.Schedule):
+        if (bus is None) or (driver is None) or (schedule is None):
+            return
+        with DB.instance.conn.cursor() as curs:
+            trip = models.Trip(-1, bus._id, driver._id, schedule._id, None, datetime.datetime.now())
+            sql = f"INSERT INTO trip ({DB.instance.get_fields(trip)}) VALUES (%s)"
+            curs.execute(sql, (trip,))
+
+    @staticmethod
+    def get_actual_trips() -> List[models.Trip]:
+        with DB.instance.conn.cursor() as curs:
+            sql = f"SELECT * FROM trip where success IS NULL"
+            curs.execute(sql)
+            result = []
+            for data in curs.fetchall():
+                result.append(models.Trip(*data))
+
+        schedules = DB.get_schedule()
+        for s in result:
+            s.schedule_id = filter(lambda r: r._id == s.schedule_id, schedules).__next__()
+
+        return result
 
     @staticmethod
     def get_drivers() -> List[models.Driver]:
@@ -217,7 +246,7 @@ CREATE DATABASE "AutoManager"
             return
         with DB.instance.conn.cursor() as curs:
             sql = f"INSERT INTO stop ({DB.instance.get_fields(stop)}) VALUES (%s)"
-            curs.execute(sql, (stop, ))
+            curs.execute(sql, (stop,))
 
     @staticmethod
     def get_busses() -> List[models.Bus]:
@@ -236,7 +265,7 @@ CREATE DATABASE "AutoManager"
             return
         with DB.instance.conn.cursor() as curs:
             sql = f"INSERT INTO driver ({DB.instance.get_fields(driver)}) VALUES (%s)"
-            curs.execute(sql, (driver, ))
+            curs.execute(sql, (driver,))
 
     @staticmethod
     def create_bus(bus: models.Bus):
@@ -245,10 +274,11 @@ CREATE DATABASE "AutoManager"
         with DB.instance.conn.cursor() as curs:
             sql = f"INSERT INTO bus ({DB.instance.get_fields(bus)}) VALUES (%s)"
             curs.execute(sql, (bus,))
-    
+
     @staticmethod
     def end_trip(trip: models.Trip, success: bool) -> bool:
         pass
+
 
 if __name__ == '__main__':
     db = DB()
