@@ -32,7 +32,7 @@ class Driver:
 class Schedule:
     _id: int
     start_time: datetime.time
-    week_date: str
+    week_days: str
     route: Route
 
 @dataclass

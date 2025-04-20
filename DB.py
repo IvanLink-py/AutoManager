@@ -138,7 +138,26 @@ CREATE DATABASE "AutoManager"
 
     @staticmethod
     def get_schedule() -> List[models.Schedule]:
-        pass
+        with DB.instance.conn.cursor() as curs:
+            sql = f"SELECT * FROM schedule"
+            curs.execute(sql)
+            result = []
+            for data in curs.fetchall():
+                result.append(models.Schedule(*data))
+
+        routes = DB.get_routes()
+        for s in result:
+            s.route = filter(lambda r: r._id == s.route, routes).__next__()
+
+        return result
+
+    @staticmethod
+    def save_schedule(schedule: models.Schedule):
+        if schedule is None:
+            return
+        with DB.instance.conn.cursor() as curs:
+            sql = f"INSERT INTO schedule ({DB.instance.get_fields(schedule)}) VALUES (%s, %s, %s)"
+            curs.execute(sql, (schedule.start_time, schedule.week_days, schedule.route._id))
 
     @staticmethod
     def get_next_trips() -> List[Tuple[datetime.time, models.Schedule]]:
