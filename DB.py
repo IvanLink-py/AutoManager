@@ -36,7 +36,9 @@ class DB:
         for f in model:
             if f == "_id":
                 continue
-            q_fields.append(adapt(model[f]).getquoted().decode())
+            ad = adapt(model[f])
+            ad.prepare(DB.instance.conn)
+            q_fields.append(ad.getquoted().decode("utf-8"))
 
         return AsIs(f"{', '.join(q_fields)}")
 
@@ -102,21 +104,41 @@ CREATE DATABASE "AutoManager"
 
     @staticmethod
     def get_drivers() -> List[models.Driver]:
-        pass
+        with DB.instance.conn.cursor() as curs:
+            sql = f"SELECT * FROM driver"
+            curs.execute(sql)
+            result = []
+            for data in curs.fetchall():
+                result.append(models.Driver(*data))
+
+        return result
 
     @staticmethod
     def get_busses() -> List[models.Bus]:
-        pass
+        with DB.instance.conn.cursor() as curs:
+            sql = f"SELECT * FROM bus"
+            curs.execute(sql)
+            result = []
+            for data in curs.fetchall():
+                result.append(models.Bus(*data))
+
+        return result
 
     @staticmethod
     def create_driver(driver: models.Driver):
+        if driver is None:
+            return
         with DB.instance.conn.cursor() as curs:
             sql = f"INSERT INTO driver ({DB.instance.get_fields(driver)}) VALUES (%s)"
             curs.execute(sql, (driver, ))
 
     @staticmethod
-    def create_bus(bus: models.Bus) -> bool:
-        pass
+    def create_bus(bus: models.Bus):
+        if bus is None:
+            return
+        with DB.instance.conn.cursor() as curs:
+            sql = f"INSERT INTO bus ({DB.instance.get_fields(bus)}) VALUES (%s)"
+            curs.execute(sql, (bus,))
     
     @staticmethod
     def end_trip(trip: models.Trip, success: bool) -> bool:

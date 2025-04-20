@@ -11,15 +11,14 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.addDriverAction.triggered.connect(self.create_new_driver)
+        self.load()
 
-    def create_new_driver(self):
-        driver = Dialogs.DriverDialog.get_new(self)
+        self.ui.addDriverAction.triggered.connect(lambda: DB.create_driver(Dialogs.DriverDialog.get_new(self)))
+        self.ui.addBusAction.triggered.connect(lambda: DB.create_bus(Dialogs.BusDialog.get_new(self)))
 
-        if driver is None:
-            return
-
-        DB.create_driver(driver)
+    def load(self):
+        self.ui.driverComboBox.insertItems(0, [f'{d.first_name} {d.last_name} {d.surname}' for d in DB.get_drivers()])
+        self.ui.busComboBox.insertItems(0, [f'{b.mark} - {b.number}' for b in DB.get_busses()])
 
 
 if __name__ == "__main__":
