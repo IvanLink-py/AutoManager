@@ -321,6 +321,111 @@ CREATE DATABASE "AutoManager"
             sql = f"UPDATE trip SET success=%s WHERE id=%s;"
             curs.execute(sql, (success, trip._id))
 
+    @staticmethod
+    def get_report_data():
+        with DB.instance.conn.cursor() as curs:
+            sql = f'''SELECT 
+            r."name" as "route", 
+            t.send_time as "Fact time", 
+            s.start_time as "Planed time",
+            d.first_name || ' ' || d.last_name || ' ' || d.surname as "driver", 
+            b.mark || ' - ' || b."number" as "bus",
+            t.success as "status"
+            FROM trip as t
+            left join bus b on t.bus_id = b.id
+            left join driver d on t.driver_id = d.id
+            left join schedule s on t.schedule_id  = s.id
+            left join route r on s.route = r.id;'''
+
+            curs.execute(sql)
+            for data in curs.fetchall():
+                yield data
+
+    @staticmethod
+    def get_report_data_2():
+        driver_data = {}
+        bus_data = {}
+        with DB.instance.conn.cursor() as curs:
+            sql = f'''SELECT 
+                d.first_name || ' ' || d.last_name || ' ' || d.surname as "driver", 
+                Count(*)
+            FROM trip as t
+                left join driver d on t.driver_id = d.id
+            group by d.id;'''
+
+            curs.execute(sql)
+            for data in curs.fetchall():
+                driver_data[data[0]] = [data[1]]
+
+        with DB.instance.conn.cursor() as curs:
+            sql = f'''SELECT 
+                d.first_name || ' ' || d.last_name || ' ' || d.surname as "driver", 
+                Count(*)
+            FROM trip as t
+                left join driver d on t.driver_id = d.id
+            where 
+	            t.success = True
+            group by d.id;'''
+
+            curs.execute(sql)
+            for data in curs.fetchall():
+                driver_data[data[0]].append(data[1])
+
+        with DB.instance.conn.cursor() as curs:
+            sql = f'''SELECT 
+                d.first_name || ' ' || d.last_name || ' ' || d.surname as "driver", 
+                Count(*)
+            FROM trip as t
+                left join driver d on t.driver_id = d.id
+            where 
+	            t.success = False
+            group by d.id;'''
+
+            curs.execute(sql)
+            for data in curs.fetchall():
+                driver_data[data[0]].append(data[1])
+
+        with DB.instance.conn.cursor() as curs:
+            sql = f'''SELECT 
+                b.mark || ' - ' || b."number" as "bus", 
+                Count(*)
+            FROM trip as t
+                left join bus b on t.bus_id = b.id
+            group by b.id;'''
+
+            curs.execute(sql)
+            for data in curs.fetchall():
+                bus_data[data[0]] = [data[1]]
+
+        with DB.instance.conn.cursor() as curs:
+            sql = f'''SELECT 
+                b.mark || ' - ' || b."number" as "bus", 
+                Count(*)
+            FROM trip as t
+                left join bus b on t.bus_id = b.id
+            where 
+	            t.success = True
+            group by b.id;'''
+
+            curs.execute(sql)
+            for data in curs.fetchall():
+                bus_data[data[0]].append(data[1])
+
+        with DB.instance.conn.cursor() as curs:
+            sql = f'''SELECT 
+                b.mark || ' - ' || b."number" as "bus", 
+                Count(*)
+            FROM trip as t
+                left join bus b on t.bus_id = b.id
+            where 
+	            t.success = False
+            group by b.id;'''
+
+            curs.execute(sql)
+            for data in curs.fetchall():
+                bus_data[data[0]].append(data[1])
+
+        return driver_data, bus_data
 
 if __name__ == '__main__':
     db = DB()

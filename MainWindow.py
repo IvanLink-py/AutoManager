@@ -7,6 +7,7 @@ import Dialogs
 import models
 from DB import DB
 from ui.ui_MainWindowDesign import Ui_MainWindow
+from Reports import *
 
 
 class MainWindow(QMainWindow):
@@ -24,6 +25,9 @@ class MainWindow(QMainWindow):
         self.ui.addDriverAction.triggered.connect(self.load_lists)
         self.ui.addBusAction.triggered.connect(self.load_lists)
         self.ui.addStopAction.triggered.connect(self.load_lists)
+
+        self.ui.tripRepportAction.triggered.connect(format_report)
+        self.ui.busDriverReportAction.triggered.connect(format_report_2)
 
         self.ui.savePushButton.clicked.connect(self.save_route)
         self.ui.sendPushButton.clicked.connect(self.sent_trip)
