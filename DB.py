@@ -1,11 +1,13 @@
 import datetime
-
+import configparser
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT, NoneAdapter
 from psycopg2.extensions import adapt, register_adapter, AsIs
 from typing import List, Tuple
 import dataclasses
 import models
+from os import path
+import sys
 
 
 class DB:
@@ -13,12 +15,37 @@ class DB:
     instance = None
 
     def __init__(self):
+        cfg = configparser.ConfigParser()
+        if not path.exists('config.ini'):
+            cfg['DataBase'] = {
+                "IP": "127.0.0.1",
+                "user": "postgres",
+                "password": "postgres"
+            }
+
+            with open('config.ini', 'w') as configfile:
+                cfg.write(configfile)
+
+            import sys
+            from PySide6 import QtWidgets
+            app = QtWidgets.QApplication(sys.argv)
+            a = QtWidgets.QMessageBox.information(None, 'Обновление конфигурации',
+                                                  "Не удалось найти конфигурационный файл 'config.ini'\nЗаполните данные для подкючения в файл.",
+                                               QtWidgets.QMessageBox.Ok)
+            sys.exit(0)
+
+        else:
+            cfg.read('config.ini')
+
         try:
-            self.conn = psycopg2.connect(dbname=self.DB_NAME, user="postgres", host="192.168.2.164", password="root")
+            self.conn = psycopg2.connect(dbname=self.DB_NAME, user=cfg['DataBase']['user'], host=cfg['DataBase']['IP'],
+                                         password=cfg['DataBase']['password'])
             self.conn.autocommit = True
         except:
             self.create_db()
-            self.conn = psycopg2.connect(dbname=self.DB_NAME, user="postgres", host="192.168.2.164", password="root")
+            self.conn = psycopg2.connect(dbname=self.DB_NAME, user=cfg['DataBase']['user'], host=cfg['DataBase']['IP'],
+                                         password=cfg['DataBase']['password'])
+
             self.conn.autocommit = True
 
         register_adapter(models.Stop, self.adapt_model)
@@ -38,7 +65,8 @@ class DB:
             if (f == "_id") or (type(model[f]) == list):
                 continue
             ad = adapt(model[f])
-            if type(model[f]) != bool and type(model[f]) != int and type(ad) != NoneAdapter and type(model[f]) != datetime.datetime:
+            if type(model[f]) != bool and type(model[f]) != int and type(ad) != NoneAdapter and type(
+                    model[f]) != datetime.datetime:
                 ad.prepare(DB.instance.conn)
             q_fields.append(ad.getquoted().decode("utf-8"))
 
@@ -56,7 +84,17 @@ class DB:
 
     @staticmethod
     def create_db():
-        conn = psycopg2.connect(dbname="postgres", user="postgres", host="192.168.2.164", password="root")
+        cfg = configparser.ConfigParser()
+        cfg.read('config.ini')
+        try:
+            conn = psycopg2.connect(dbname="postgres", host=cfg['DataBase']['IP'], password=cfg['DataBase']['password'])
+        except psycopg2.OperationalError:
+            import sys
+            from PySide6 import QtWidgets
+            app = QtWidgets.QApplication(sys.argv)
+            a = QtWidgets.QMessageBox.critical(None, 'Ошибка подключения', "Не удалось подключиться к БД\nПроверьте config.ini", QtWidgets.QMessageBox.Ok)
+            sys.exit(0)
+
         conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         conn.autocommit = True
         cur = conn.cursor()

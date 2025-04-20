@@ -7,9 +7,9 @@ import ctypes
 
 
 def main():
+    DB()
     app = QApplication(sys.argv)
     app.setStyle('fusion')
-    DB()
     wnd = MainWindow()
     wnd.show()
     sys.exit(app.exec())
