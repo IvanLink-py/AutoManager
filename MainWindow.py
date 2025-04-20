@@ -1,6 +1,7 @@
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QTableWidgetItem
 from PySide6.QtCore import QRect, QCoreApplication
+from PySide6.QtGui import QIcon
 
 import Dialogs
 import models
@@ -30,6 +31,10 @@ class MainWindow(QMainWindow):
         self.ui.cancelPushButton.clicked.connect(self.cancel_edit_route)
         self.ui.addRouteStopPushButton.clicked.connect(self.add_route_stop)
         self.ui.routesListWidget.currentRowChanged.connect(self.change_current_route)
+
+        my_icon = QIcon()
+        my_icon.addFile('resources/icon.ico')
+        self.setWindowIcon(my_icon)
 
         self.load()
 

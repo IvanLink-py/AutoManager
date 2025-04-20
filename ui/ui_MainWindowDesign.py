@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainWindowDesignQuvvGl.ui'
+## Form generated from reading UI file 'MainWindowDesignleQbiQ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.0
 ##
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1146, 770)
+        MainWindow.resize(1097, 765)
         self.action = QAction(MainWindow)
         self.action.setObjectName(u"action")
         self.addDriverAction = QAction(MainWindow)
@@ -46,6 +46,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.label = QLabel(self.centralwidget)
         self.label.setObjectName(u"label")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy)
         self.label.setStyleSheet(u"font: 700 14pt \"Segoe UI\";")
 
         self.verticalLayout_7.addWidget(self.label)
@@ -64,11 +69,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.routesListWidget = QListWidget(self.layoutWidget)
         self.routesListWidget.setObjectName(u"routesListWidget")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.routesListWidget.sizePolicy().hasHeightForWidth())
-        self.routesListWidget.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.routesListWidget.sizePolicy().hasHeightForWidth())
+        self.routesListWidget.setSizePolicy(sizePolicy1)
 
         self.verticalLayout_4.addWidget(self.routesListWidget)
 
@@ -105,11 +110,11 @@ class Ui_MainWindow(object):
 
         self.routeNameLineEdit = QLineEdit(self.groupBox)
         self.routeNameLineEdit.setObjectName(u"routeNameLineEdit")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.routeNameLineEdit.sizePolicy().hasHeightForWidth())
-        self.routeNameLineEdit.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.routeNameLineEdit.sizePolicy().hasHeightForWidth())
+        self.routeNameLineEdit.setSizePolicy(sizePolicy2)
 
         self.horizontalLayout_3.addWidget(self.routeNameLineEdit)
 
@@ -124,8 +129,8 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.routeStopsListWidget = QListWidget(self.groupBox_2)
         self.routeStopsListWidget.setObjectName(u"routeStopsListWidget")
-        sizePolicy.setHeightForWidth(self.routeStopsListWidget.sizePolicy().hasHeightForWidth())
-        self.routeStopsListWidget.setSizePolicy(sizePolicy)
+        sizePolicy1.setHeightForWidth(self.routeStopsListWidget.sizePolicy().hasHeightForWidth())
+        self.routeStopsListWidget.setSizePolicy(sizePolicy1)
 
         self.verticalLayout.addWidget(self.routeStopsListWidget)
 
@@ -133,8 +138,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.newRouteStopComboBox = QComboBox(self.groupBox_2)
         self.newRouteStopComboBox.setObjectName(u"newRouteStopComboBox")
-        sizePolicy1.setHeightForWidth(self.newRouteStopComboBox.sizePolicy().hasHeightForWidth())
-        self.newRouteStopComboBox.setSizePolicy(sizePolicy1)
+        sizePolicy2.setHeightForWidth(self.newRouteStopComboBox.sizePolicy().hasHeightForWidth())
+        self.newRouteStopComboBox.setSizePolicy(sizePolicy2)
 
         self.horizontalLayout_4.addWidget(self.newRouteStopComboBox)
 
@@ -197,10 +202,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_7 = QHBoxLayout(self.layoutWidget1)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_3 = QSpacerItem(120, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_7.addItem(self.horizontalSpacer_3)
-
         self.groupBox_3 = QGroupBox(self.layoutWidget1)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.verticalLayout_5 = QVBoxLayout(self.groupBox_3)
@@ -257,10 +258,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8 = QHBoxLayout(self.layoutWidget_2)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.horizontalSpacer_4 = QSpacerItem(120, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_8.addItem(self.horizontalSpacer_4)
-
         self.groupBox_4 = QGroupBox(self.layoutWidget_2)
         self.groupBox_4.setObjectName(u"groupBox_4")
         self.verticalLayout_6 = QVBoxLayout(self.groupBox_4)
@@ -303,7 +300,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1146, 22))
+        self.menubar.setGeometry(QRect(0, 0, 1097, 22))
         self.menu = QMenu(self.menubar)
         self.menu.setObjectName(u"menu")
         self.menu_2 = QMenu(self.menubar)
